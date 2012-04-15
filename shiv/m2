@@ -1,0 +1,32 @@
+DEFINES += _NOPEEK_
+LDLIBS += -lACE
+INCLUDEPATHS = /usr/local/ACE/ .
+CXXFLAGS = -Wall -Wno-unused-function -Wextra \
+-Wno-unused-parameter $(patsubst %,-I%,$(INCLUDEPATHS)) \
+-fno-strict-aliasing $(foreach define,$(DEFINES),-D$(define)) \
+-MD
+LINK.o = g++
+DISTNAME = ftp_proj
+TARGET = 
+OBJECTS = 
+CLEANFILES +=  $(wildcard *.d) serv client
+DISTFILES += $(wildcard Makefile*) README $(wildcard *.cc) $(wildcard *.hh)
+SOURCES = $(wildcard *.cc)
+PDFS = $(patsubst %,%.pdf,$(wildcard *.cc) $(wildcard *.hh))
+#include Makefile.common
+#-include Makefile.$(OSTYPE)
+-include $(SOURCES:.cc=.d)
+all: serv client
+$(TARGET): $(OBJECTS)
+#pack.cc: endian.cc
+#Packet.cc: pack.cc
+#ReceiverEndpoint.o SenderEndpoint.o main.o: Packet.cc Endpoint.o
+#main: main.o Endpoint.o ReceiverEndpoint.o SenderEndpoint.o NetworkedClient.o
+
+#send recv: main
+#ln -sf $^ $@
+#pdfs: $(PDFS)
+#$(PDFS): %.pdf: %
+#a2ps -2 -E -s 2 -C $^ -o $^.ps
+#ps2pdf $^.ps
+#-rm $^.ps

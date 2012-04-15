@@ -1,1 +1,10 @@
 implementation of ftp using datagrams and ace lib
+
+Linux and Solaris compatible; solaris users will have to specifically socket library to linker. See Beejs' guide to networking and building on Solaris for more info.
+
+This program uses datagrams to implement a file transfer suite (both server and client).  To accomplish proper file transferring, TCP like features are implemented in datagram (CRC, sliding window, etc)
+
+
+
+
+
